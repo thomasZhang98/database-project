@@ -96,7 +96,7 @@ if __name__ == '__main__':
                 cur.execute(stmt_check_if_username_exists)
                 found = cur.fetchone()
                 # Sign up a test subject
-                elif userType == testSubjectType:
+                if userType == testSubjectType:
                     while True:
                         subtype = input('What kind of testing subject is this? a. Student b. Professor c. Staff')
                         if subtype in ['a', 'b', 'c']:
@@ -117,17 +117,16 @@ if __name__ == '__main__':
                             year_graduate = int(input('What is the year of graduation?'))
                             # Add new records to the student table.
                             cur2 = connection.cursor()
-                            stmt_insert_student = 'CALL insert_student(\'' + full_name + '\', \'' 
-                                                                           + birthdate + '\', \'' 
-                                                                           + gender '\', \'' 
-                                                                           + phone_number + '\', \'' 
-                                                                           + email + '\', \''
-                                                                           + address + '\', \''
-                                                                           + test_frequency + '\', \''
-                                                                           + college + '\', \''
-                                                                           + major + '\', \''
-                                                                           + year_graduate + '\', \''
-                                                                           + '\')'
+                            stmt_insert_student = 'CALL insert_student(\'' + full_name + '\', \''
+                            + birthdate + '\', \'' 
+                            + gender + '\', \'' 
+                            + phone_number + '\', \'' 
+                            + email + '\', \''
+                            + address + '\', \'' 
+                            + test_frequency + '\', \'' 
+                            + college + '\', \'' 
+                            + major + '\', \'' 
+                            + year_graduate + '\', \'' + '\')'
                             cur2.execute(stmt_insert_student)
                             loggedInId = cur2.fetchone()['user_id']
                             break
@@ -141,14 +140,14 @@ if __name__ == '__main__':
                             # Add new records to the professor table.
                             cur2 = connection.cursor()
                             stmt_insert_professor = 'CALL insert_professor(\'' + full_name + '\', \'' 
-                                                                                + birthdate + '\', \'' 
-                                                                                + gender '\', \'' 
-                                                                                + phone_number + '\', \'' 
-                                                                                + email + '\', \''
-                                                                                + address + '\', \''
-                                                                                + test_frequency + '\', \''
-                                                                                + college + '\', \''
-                                                                                + department '\')'
+                            + birthdate + '\', \'' 
+                            + gender + '\', \'' 
+                            + phone_number + '\', \'' 
+                            + email + '\', \''
+                            + address + '\', \''
+                            + test_frequency + '\', \''
+                            + college + '\', \''
+                            + department + '\')'
                             cur2.execute(stmt_insert_professor)
                             loggedInId = cur2.fetchone()['user_id']
                             break
@@ -162,14 +161,14 @@ if __name__ == '__main__':
                             # Add new records to the staff table.
                             cur2 = connection.cursor()
                             stmt_insert_staff = 'CALL insert_staff(\'' + full_name + '\', \'' 
-                                                                           + birthdate + '\', \'' 
-                                                                           + gender '\', \'' 
-                                                                           + phone_number + '\', \'' 
-                                                                           + email + '\', \''
-                                                                           + address + '\', \''
-                                                                           + test_frequency + '\', \''
-                                                                           + department + '\', \''
-                                                                           + job_title '\')'
+                            + birthdate + '\', \'' 
+                            + gender + '\', \'' 
+                            + phone_number + '\', \'' 
+                            + email + '\', \''
+                            + address + '\', \''
+                            + test_frequency + '\', \''
+                            + department + '\', \''
+                            + job_title + '\')'
                             cur2.execute(stmt_insert_staff)
                             loggedInId = cur2.fetchone()['user_id']
                             break
@@ -180,8 +179,7 @@ if __name__ == '__main__':
                 # Sign up a testing center employee
                 elif userType == centerEmployeeType:
                     while True:
-                        first_name = input('What is the first name?')
-                        last_name = input('What is the last name?')
+                        full_name = input('What is the full name?')
                         start_date = input('What is the start date? Use format of yyyy-mm-dd')
                         center_id = input('What is the center id?')
                         phone_number = int(input('What is the phone number?'))
@@ -189,7 +187,11 @@ if __name__ == '__main__':
                         try:
                             # Add new records to the center_employee table.
                             cur2 = connection.cursor()
-                            stmt_insert_center_employee = 'CALL insert_center_employee(\'' + first_name + ' ' + last_name + '\', \'' + start_date + '\', \'' center_id '\', \'' + phone_number + '\', \'' + email + '\')'
+                            stmt_insert_center_employee = 'CALL insert_center_employee(\'' + full_name + '\', \'' 
+                            + start_date + '\', \'' 
+                            + center_id + '\', \''
+                            + phone_number + '\', \'' 
+                            + email + '\')'
                             cur2.execute(stmt_insert_center_employee)
                             loggedInId = cur2.fetchone()['user_id']
                             break
@@ -201,15 +203,14 @@ if __name__ == '__main__':
                 # Sign up a lab employee type
                 elif userType == labEmployeeType:
                     while True:
-                        first_name = input('What is the first name?')
-                        last_name = input('What is the last name?')
+                        full_name = input('What is the full name?')
                         start_date = input('What is the start date? Use format of yyyy-mm-dd')
                         phone_number = int(input('What is the phone number?'))
                         email = input('What is the email?')
                         try:
                             # Add new records to the lab_employee table.
                             cur2 = connection.cursor()
-                            stmt_insert_lab_employee = 'CALL insert_lab_employee(\'' + first_name + ' ' + last_name + '\', \'' + start_date + '\', \'' + phone_number + '\', \'' + email + '\')'
+                            stmt_insert_lab_employee = 'CALL insert_lab_employee(\'' + full_name + '\', \'' + start_date + '\', \'' + phone_number + '\', \'' + email + '\')'
                             cur2.execute(stmt_insert_lab_employee)
                             loggedInId = cur2.fetchone()['user_id']
                             break
